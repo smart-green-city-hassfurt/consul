@@ -1,0 +1,16 @@
+.sdg-content-menu {
+
+  [class^="icon-"] {
+
+    &.icon-sdg {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+
+      &::before {
+        @extend %svg-icon;
+        mask-image: image-url("sdg.svg");
+      }
+    }
+  }
+}

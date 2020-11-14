@@ -1,4 +1,4 @@
-class Admin::SDG::TargetsController < Admin::BaseController
+class SDGManagement::TargetsController < SDGManagement::BaseController
   Target = ::SDG::Target
 
   def index

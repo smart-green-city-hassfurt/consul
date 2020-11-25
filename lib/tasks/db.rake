@@ -10,4 +10,9 @@ namespace :db do
     ApplicationLogger.new.info "Adding Sustainable Development Goals content"
     load(Rails.root.join("db", "sdg.rb"))
   end
+
+  desc "Loads demo content from db/demo_seeds.rb"
+  task demo_seed: :environment  do
+    load Rails.root.join("db", "demo_seeds.rb")
+  end
 end

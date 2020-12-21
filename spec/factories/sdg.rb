@@ -14,4 +14,14 @@ FactoryBot.define do
 
     target { SDG::Target[code.rpartition(".").first] }
   end
+
+  factory :sdg_revision, class: "SDG::Revision" do
+    revised_at { DateTime.current }
+
+    %i[budget_investment debate legislation_process poll proposal].each do |model|
+      trait :"#{model}_as_relatable" do
+        association :relatable, factory: model
+      end
+    end
+  end
 end

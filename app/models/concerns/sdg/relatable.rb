@@ -28,6 +28,18 @@ module SDG::Relatable
 
       joins(sdg_class.table_name.to_sym).merge(sdg_class.where(code: code))
     end
+
+    def by_revision_status(revision_status)
+      case revision_status
+      when "pending", nil
+        revised_ids = SDG::Revision.where(relatable_type: self.name).pluck(:relatable_id)
+        where.not(id: revised_ids)
+      when "all"
+        all
+      when "revised"
+        joins(:sdg_revision)
+      end
+    end
   end
 
   def related_sdgs

@@ -170,4 +170,21 @@ describe SDG::Relatable do
       expect(relatable.class.by_target(target.code)).to be_empty
     end
   end
+
+  describe ".by_revision_status" do
+    let(:revised_relatable) { create(:sdg_revision, relatable: create(:proposal)).relatable }
+
+    it "returns everything if revision_status is all" do
+      expect(relatable.class.by_revision_status("all")).to eq [relatable, revised_relatable]
+    end
+
+    it "returns revision pending records when revision_status is pending or undefined" do
+      expect(relatable.class.by_revision_status("pending")).to eq [relatable]
+      expect(relatable.class.by_revision_status(nil)).to eq [relatable]
+    end
+
+    it "returns already revised records when revision_status is revised" do
+      expect(relatable.class.by_revision_status("revised")).to eq [revised_relatable]
+    end
+  end
 end

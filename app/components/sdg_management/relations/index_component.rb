@@ -53,4 +53,8 @@ class SDGManagement::Relations::IndexComponent < ApplicationComponent
     def target_options
       options_from_collection_for_select(SDG::Target.all.sort, :code, :code, params[:target_code])
     end
+
+    def revision_status
+      params[:revision_status] || "pending"
+    end
 end

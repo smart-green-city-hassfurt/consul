@@ -7,6 +7,7 @@ class SDGManagement::RelationsController < SDGManagement::BaseController
                .accessible_by(current_ability)
                .by_goal(params[:goal_code])
                .by_target(params[:target_code])
+               .by_revision_status(params[:revision_status])
                .order(:id)
                .page(params[:page])
 
